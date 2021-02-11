@@ -1,4 +1,4 @@
-# Javascript 
+# Javascript101 
 
 ## 1. Variables 
 
@@ -137,7 +137,7 @@ var str = JSON.stringify(obj9);
 JSON.parse(str);
 
 ```
-### 8. Object 
+### 8. Symbol 
 
 ES6 introduced a new primitive type for javascript : Symbols. 
 Each time symbol function is called a unique symbol is returned.
@@ -181,6 +181,12 @@ typeof [];
 
 typeof null;
 //"object"
+
+typeof NaN;
+//"number"
+
+typeof undefined;
+//"undefined"
 ```
 
 ## 3. Type Coercion 
@@ -196,6 +202,8 @@ Coersion are of two type :-
 Number(4)
 //4
 Number(undefined);
+//NaN
+Number(NaN)
 //NaN
 Number(null);
 //0
@@ -277,8 +285,27 @@ Object.is(NaN,NaN);
 Object.is(100,"100");
 //false
 ```
+## 5a. Arithmatic Operator
 
-## 5. Comparision Operator
+ / , + , - , * , % , ++ , -- are all arthematic operator
+
+```javascript
+//postincrement
+var i = 10;
+i++;
+//10
+i;
+//11
+
+//preincrement
+var y = 10;
+++y;
+//11
+
+```
+## 5b. Comparison Operator
+
+== , === , != , !== , > , < , >= , <= are all comparison operator.
 
 ```javascript
 10 !== 10 
@@ -296,6 +323,289 @@ h.charCodeAt()
 104>72
 //true
 ```
+## 5c. Logical Operator
+
+&& , || , ! are logical operator
+
+```javascript
+var x = 10;
+var y = 11;
+
+x || y
+// if x is true , it will never execute y 
+// But if x is false , it will go y and execute it
+//10 
+
+var k = [] || "hey";
+k;
+//[]
+
+//It checks boolean of the given operand
+Boolean([])
+//true , so return [] when || is used
+
+var j = 0 || "hey";
+j;
+//"hey"
+
+
+var o = true || "hey";
+//Either both value must be true or both should be false
+//true
+```
+
+## 5d. Assignment Operator
+
+= , += , /= , %= , -= , *= are assignment operator
+
+```javascript
+var a = 10 
+a+=10;
+a
+//20
+```
+
+## 5e. Ternary Operator
+
+Special operatory that assign value to a variable based on the condition.
+Short form of if-else
+
+```javascript 
+var name = "nik";
+
+var isAvailable = name === "nik" ? "present" : "absent";
+isAvailable
+//"present"
+```
+
+## 6. Conditional Statement
+
+1. ***if statement***
+```javascript
+var k = 10;
+if(k)
+{
+    console.log("okay");
+}
+//okay
+```
+
+2. ***if else statement***
+```javascript
+var k = 0;
+if(k)
+{
+    console.log("okay");
+}
+else
+{
+    console.log("not okay");
+}
+//not okay
+```
+3. ***if else if statement***
+```javascript
+var k = "A";
+if(k==="A")
+{
+    console.log("A");
+} 
+else if(k==="B")
+{
+    console.log("B");
+}
+else
+{
+    console.log("C");
+}
+//A
+```
+
+4. ***switch case***
+```javascript
+var num = 2;
+var day;
+switch(num)
+{
+    case 0:
+    day = "Monday";
+    break;
+    case 1:
+    day = "Tuesday";
+    break;
+    default:
+    day = "Anyday"; 
+}
+//Anyday 
+```
+## 7. var, const and let keywords
+
+1. ***var***
+var is a global scoped
+There are issues associated with variable declared with var ie ***Hoisting*** 
+That take all the variable to the top 
+
+```javascript
+console.log(x)
+var x = 10;
+//undefined
+//cz it take variable declaration on the top ie 
+//var x
+//console.log(x) //undefined
+//x = 10;
+```
+2. ***let***
+let was introduced to resolve this hoisting issue.
+let is block scoped
+let can br upadated but not redeclared.
+
+```javascript
+var k=10;
+if(k)
+{
+var s = "string";
+}
+console.log(s);
+//string is printed cz s is global scoped
+
+let k= 10;
+if(k)
+{
+let s= "string";
+}
+console.log(s);
+//Error is thrown cz s is in if block 
+
+
+var k = 20;
+var k = 10; // k redeclared work with var
+k
+//10
+
+let o = 10;
+let o = 40; // o redeclared will throw error
+```
+
+3. **const***
+const resolve  hoisting issue.
+const is block scoped
+const cannot be upadated and redeclared except objects
+
+```javascript
+const name = "patt"
+const name = "frank" //Will throw error cz redeclared
+
+const obj = {name = "kash"};
+obj.name = " karl";
+//This will work cz we are updating just the properties not the reference
+
+const obj = {} // this will throw error bcz already declared
+```
+
+
+
+## Arrays
+
+Array is an object which can store multiple values of different types.
+Array can be initialized using two ways Array literal and Array constructer.
+
+```javascript 
+//Array literals
+var arr = [];
+arr
+//[]
+var arr = [10,12,14,15];
+arr
+//[10,12,14,15]
+var arr = [1,'a','b',5];
+arr
+//[1,'a','b',5]
+
+//Array contructor
+var arr1 = new Array();
+
+arr1[0] = "Pam";
+arr1
+//["Pam"]
+
+//array with particular length
+var arr2 = new Array(4);
+
+arr2.length();
+//4
+
+arr2[0]=0;
+arr2[1]=1;
+arr2[2]=2;
+arr2[3]=3;
+arr2
+//[0,1,2,3]
+
+//Directly pass the value
+var arr5 = new Array(1,"a","b",5);
+
+arr5
+//[1,"a","b",5]
+```
+
+***Array methods***
+1. push - Add the element at last
+
+```javascript
+var a = [1,2,4,5];
+a.push(6);
+//return lenght of the array 5
+a
+//[1,2,4,5,6]
+```
+2. pop - Remove element at last
+
+```javascript
+var a = [1,2,4,5];
+a.pop();
+//6 return the value at the end
+a
+//[1,2,4,5]
+```
+
+3. shift - Remove element from the front
+
+```javascript
+var a = [1,2,4,5];
+a.shift();
+//1
+a
+//[2,4,5]
+```
+
+4. unshift - Add element at front
+
+```javascript
+var a = [1,2,4,5];
+a.unshift(8);
+//5 length of the array
+a
+//[8,1,2,4,5]
+```
+
+5. splice - Add and remove element from particular index
+
+```javascript 
+var x = [1,2,4,5,6,7];
+x.splice(1,2);
+//Starting from 1st index delete 2 numbers
+//[2,4]
+x
+//[1,5,6,7]
+
+x = [1,2,4,5,6,7];
+x.splice(4,0,15);
+//If we have 0 as 2nd parameter that means we have nothing to remove and add 15 to 4th index
+//[]
+x
+//[1,2,4,5,15,6,7]
+
+
 
 
 
